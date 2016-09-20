@@ -63,12 +63,27 @@ update_status ModuleEditor::Update(float dt)
 		ImGui::EndMenu();
 	}
 
+	if (ImGui::BeginMenu("View"))
+	{
+		if (ImGui::MenuItem("Configuration"))
+			configuration = !configuration;
+
+		ImGui::EndMenu();
+	}
+
 	ImGui::EndMainMenuBar();
 
 	if(demo)
 		ImGui::ShowTestWindow();
 
-	
+	if (configuration)
+	{
+		ImGui::Begin("Configuration");
+
+		ImGui::CollapsingHeader("Application");
+
+		ImGui::End();
+	}
 	
 	return UPDATE_CONTINUE;
 }

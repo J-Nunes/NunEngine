@@ -72,13 +72,33 @@ bool Application::Init()
 // ---------------------------------------------
 void Application::PrepareUpdate()
 {
-	dt = (float)ms_timer.Read() / 1000.0f;
+	frame_count++;
+	last_sec_frame_count++;
+
+	dt = frame_time.ReadSec();
+	frame_time.Start();
 	ms_timer.Start();
 }
 
 // ---------------------------------------------
 void Application::FinishUpdate()
 {
+	if (last_sec_frame_time.Read() > 1000)
+	{
+		last_sec_frame_time.Start();
+		prev_last_sec_frame_count = last_sec_frame_count;
+		last_sec_frame_count = 0;
+	}
+
+	int last_frame_ms = frame_time.Read();
+
+
+	if (capped_ms > 0 && last_frame_ms < capped_ms)
+	{
+		PerfTimer t;
+		SDL_Delay(capped_ms - last_frame_ms);
+		//LOG("We waited for %d milliseconds and got back in %f", capped_ms - last_frame_ms, t.ReadMs());
+	}
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
@@ -139,4 +159,9 @@ void Application::AddModule(Module* mod)
 void Application::RequestBrowser(const char* url)
 {
 	ShellExecuteA(NULL, "open", url, NULL, NULL, NULL);
+}
+
+int Application::GetFPS()
+{
+	return prev_last_sec_frame_count;
 }

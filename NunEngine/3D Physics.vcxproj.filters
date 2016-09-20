@@ -108,6 +108,9 @@
     <ClInclude Include="ModuleEditor.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="PerfTimer.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -175,6 +178,9 @@
     </ClCompile>
     <ClCompile Include="ModuleEditor.cpp">
       <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="PerfTimer.cpp">
+      <Filter>Sources\Tools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,8 @@
 #include "Globals.h"
 #include "Primitive.h"
 
+#include <vector>
+
 
 
 class ModuleEditor : public Module
@@ -21,5 +23,8 @@ public:
 
 private:
 	bool demo = false;
+	bool configuration = false;
+
+	vector<float> frames_to_print;
 
 };

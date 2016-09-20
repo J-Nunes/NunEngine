@@ -3,6 +3,7 @@
 #include <list>
 #include "Globals.h"
 #include "Timer.h"
+#include "PerfTimer.h"
 #include "Module.h"
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
@@ -30,8 +31,17 @@ public:
 private:
 
 	Timer	ms_timer;
-	float	dt;
 	list<Module*> list_modules;
+
+	PerfTimer			ptimer;
+	int					frame_count = 0;
+	Timer				startup_time;
+	Timer				frame_time;
+	Timer				last_sec_frame_time;
+	int					last_sec_frame_count = 0;
+	int					prev_last_sec_frame_count = 0;
+	float				dt = 0.0f;
+	int					capped_ms = -1;
 
 public:
 
@@ -43,6 +53,7 @@ public:
 	bool CleanUp();
 
 	void RequestBrowser(const char* url);
+	int GetFPS();
 
 private:
 
