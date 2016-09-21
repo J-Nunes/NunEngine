@@ -20,6 +20,7 @@ bool ModuleEditor::Start()
 	bool ret = true;
 
 	frame_timer.Start();
+	ms_timer.Start();
 
 	return ret;
 }
@@ -32,29 +33,30 @@ bool ModuleEditor::CleanUp()
 	return true;
 }
 
-void ModuleEditor::FillFPSBar()
+void ModuleEditor::FillBar(Timer &timer, const int &timer_check, vector<float> &container, float new_value)
 {
-	if (frame_timer.Read() > 1000)
+	if (timer.Read() > timer_check)
 	{
-		frame_timer.Start();
+		timer.Start();
 
-		if (frames_to_print.size() > 100)
+		if (container.size() > 100)
 		{
-			for (int i = 1; i < frames_to_print.size(); i++)
-				frames_to_print[i - 1] = frames_to_print[i];
+			for (int i = 1; i < container.size(); i++)
+				container[i - 1] = container[i];
 
-			frames_to_print[frames_to_print.size() - 1] = App->GetFPS();
+			container[container.size() - 1] = new_value;
 		}
 
 		else
-			frames_to_print.push_back(App->GetFPS());
+			container.push_back(new_value);
 	}
 }
 
 // Update
 update_status ModuleEditor::Update(float dt)
 {
-	FillFPSBar();
+	FillBar(frame_timer, 1000, frames, App->GetFPS());
+	FillBar(ms_timer, 1, ms, App->GetFrameMs());
 
 	//Create the menu bar
 	ImGui::BeginMainMenuBar();
@@ -104,8 +106,10 @@ update_status ModuleEditor::Update(float dt)
 		if(ImGui::CollapsingHeader("Application"))
 		{
 			char title[25];
-			sprintf_s(title, 25, "Framerate %.1f", frames_to_print[frames_to_print.size() - 1]);
-			ImGui::PlotHistogram("##framerate", &frames_to_print[0], frames_to_print.size(), 0, title, 0.0f, 100.0f, ImVec2(310, 100)); 
+			sprintf_s(title, 25, "Framerate %.1f", frames[frames.size() - 1]);
+			ImGui::PlotHistogram("##framerate", &frames[0], frames.size(), 0, title, 0.0f, 100.0f, ImVec2(310, 100));
+			sprintf_s(title, 25, "Milliseconds %.1f", ms[ms.size() - 1]);
+			ImGui::PlotHistogram("##framerate", &ms[0], ms.size(), 0, title, 0.0f, 40.0f, ImVec2(310, 100));
 		}
 
 		ImGui::End();

@@ -18,7 +18,7 @@ public:
 	bool			CleanUp();
 
 private:
-	void			FillFPSBar();
+	void			FillBar(Timer &timer, const int &timer_check,vector<float> &container, float new_value);
 
 public:
 
@@ -27,6 +27,8 @@ private:
 	bool				configuration = false;
 
 	Timer				frame_timer;
-	vector<float>		frames_to_print;
+	Timer				ms_timer;
+	vector<float>		ms;
+	vector<float>		frames;
 
 };

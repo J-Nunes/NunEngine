@@ -39,6 +39,7 @@ private:
 	int					last_sec_frame_count = 0;
 	int					prev_last_sec_frame_count = 0;
 	float				dt = 0.0f;
+	int					last_frame_ms = 0;
 	float				capped_ms = -1;
 
 public:
@@ -52,6 +53,7 @@ public:
 
 	void RequestBrowser(const char* url);
 	int GetFPS();
+	int GetFrameMs();
 	bool SecCounter();
 
 private:

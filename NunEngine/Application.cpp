@@ -91,7 +91,7 @@ void Application::FinishUpdate()
 		last_sec_frame_count = 0;
 	}
 
-	int last_frame_ms = frame_time.Read();
+	last_frame_ms = frame_time.Read();
 
 
 	if (capped_ms > 0 && last_frame_ms < capped_ms)
@@ -165,6 +165,11 @@ void Application::RequestBrowser(const char* url)
 int Application::GetFPS()
 {
 	return prev_last_sec_frame_count;
+}
+
+int Application::GetFrameMs()
+{
+	return last_frame_ms;
 }
 
 bool Application::SecCounter()
