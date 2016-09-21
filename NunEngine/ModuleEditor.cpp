@@ -1,8 +1,6 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleEditor.h"
-#include "Primitive.h"
-#include "PhysBody3D.h"
 
 #include "Imgui\imgui.h"
 
