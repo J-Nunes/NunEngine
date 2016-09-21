@@ -13,18 +13,20 @@ public:
 	ModuleEditor(Application* app, bool start_enabled = true);
 	~ModuleEditor();
 
-	bool Start();
-	update_status Update(float dt);
-	bool CleanUp();
+	bool			Start();
+	update_status	Update(float dt);
+	bool			CleanUp();
 
-
+private:
+	void			FillFPSBar();
 
 public:
 
 private:
-	bool demo = false;
-	bool configuration = false;
+	bool				demo = false;
+	bool				configuration = false;
 
-	vector<float> frames_to_print;
+	Timer				frame_timer;
+	vector<float>		frames_to_print;
 
 };

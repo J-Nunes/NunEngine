@@ -19,7 +19,7 @@ bool ModuleEditor::Start()
 	LOG("Loading Intro assets");
 	bool ret = true;
 
-
+	frame_timer.Start();
 
 	return ret;
 }
@@ -32,9 +32,30 @@ bool ModuleEditor::CleanUp()
 	return true;
 }
 
+void ModuleEditor::FillFPSBar()
+{
+	if (frame_timer.Read() > 1000)
+	{
+		frame_timer.Start();
+
+		if (frames_to_print.size() > 100)
+		{
+			for (int i = 1; i < frames_to_print.size(); i++)
+				frames_to_print[i - 1] = frames_to_print[i];
+
+			frames_to_print[frames_to_print.size() - 1] = App->GetFPS();
+		}
+
+		else
+			frames_to_print.push_back(App->GetFPS());
+	}
+}
+
 // Update
 update_status ModuleEditor::Update(float dt)
 {
+	FillFPSBar();
+
 	//Create the menu bar
 	ImGui::BeginMainMenuBar();
 	
@@ -80,7 +101,12 @@ update_status ModuleEditor::Update(float dt)
 	{
 		ImGui::Begin("Configuration");
 
-		ImGui::CollapsingHeader("Application");
+		if(ImGui::CollapsingHeader("Application"))
+		{
+			char title[25];
+			sprintf_s(title, 25, "Framerate %.1f", frames_to_print[frames_to_print.size() - 1]);
+			ImGui::PlotHistogram("##framerate", &frames_to_print[0], frames_to_print.size(), 0, title, 0.0f, 100.0f, ImVec2(310, 100)); 
+		}
 
 		ImGui::End();
 	}

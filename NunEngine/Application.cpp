@@ -2,6 +2,8 @@
 
 Application::Application()
 {
+	capped_ms = 1000 / 60;
+
 	window = new ModuleWindow(this);
 	input = new ModuleInput(this);
 	audio = new ModuleAudio(this, true);
@@ -65,7 +67,7 @@ bool Application::Init()
 		++i;
 	}
 	
-	ms_timer.Start();
+	startup_time.Start();
 	return ret;
 }
 
@@ -77,13 +79,12 @@ void Application::PrepareUpdate()
 
 	dt = frame_time.ReadSec();
 	frame_time.Start();
-	ms_timer.Start();
 }
 
 // ---------------------------------------------
 void Application::FinishUpdate()
 {
-	if (last_sec_frame_time.Read() > 1000)
+	if (SecCounter())
 	{
 		last_sec_frame_time.Start();
 		prev_last_sec_frame_count = last_sec_frame_count;
@@ -164,4 +165,9 @@ void Application::RequestBrowser(const char* url)
 int Application::GetFPS()
 {
 	return prev_last_sec_frame_count;
+}
+
+bool Application::SecCounter()
+{
+	return (last_sec_frame_time.Read() > 1000);
 }
