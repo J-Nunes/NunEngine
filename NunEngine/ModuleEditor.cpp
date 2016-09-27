@@ -31,6 +31,18 @@ bool ModuleEditor::CleanUp()
 	return true;
 }
 
+// Update
+update_status ModuleEditor::Update(float dt)
+{
+	//Create the menu bar
+	MenuMainBar();
+	
+	if (want_to_close)
+		return UPDATE_STOP;
+	else
+		return UPDATE_CONTINUE;
+}
+
 void ModuleEditor::FillBar(Timer &timer, const int &timer_check, vector<float> &container, float new_value)
 {
 	if (timer.Read() > timer_check)
@@ -50,23 +62,35 @@ void ModuleEditor::FillBar(Timer &timer, const int &timer_check, vector<float> &
 	}
 }
 
-// Update
-update_status ModuleEditor::Update(float dt)
+void ModuleEditor::CloseApp()
 {
-	FillBar(frame_timer, 1000, frames, App->GetFPS());
-	FillBar(ms_timer, 1, ms, App->GetFrameMs());
+	want_to_close = true;
+}
 
-	//Create the menu bar
+void ModuleEditor::MenuMainBar()
+{
 	ImGui::BeginMainMenuBar();
-	
+
+	MenuFile();
+	MenuHelp();
+	MenuView();
+
+	ImGui::EndMainMenuBar();
+}
+
+void ModuleEditor::MenuFile()
+{
 	if (ImGui::BeginMenu("File"))
 	{
 		if (ImGui::MenuItem("Quit"))
-			return UPDATE_STOP;
+			CloseApp();
 
 		ImGui::EndMenu();
 	}
+}
 
+void ModuleEditor::MenuHelp()
+{
 	if (ImGui::BeginMenu("Help"))
 	{
 		if (ImGui::MenuItem("Demo"))
@@ -84,6 +108,15 @@ update_status ModuleEditor::Update(float dt)
 		ImGui::EndMenu();
 	}
 
+	if (demo)
+		ImGui::ShowTestWindow();
+}
+
+void ModuleEditor::MenuView()
+{
+	FillBar(frame_timer, 1000, frames, App->GetFPS());
+	FillBar(ms_timer, 1, ms, App->GetFrameMs());
+
 	if (ImGui::BeginMenu("View"))
 	{
 		if (ImGui::MenuItem("Configuration"))
@@ -92,16 +125,11 @@ update_status ModuleEditor::Update(float dt)
 		ImGui::EndMenu();
 	}
 
-	ImGui::EndMainMenuBar();
-
-	if(demo)
-		ImGui::ShowTestWindow();
-
 	if (configuration)
 	{
 		ImGui::Begin("Configuration");
 
-		if(ImGui::CollapsingHeader("Application"))
+		if (ImGui::CollapsingHeader("Application"))
 		{
 			char title[25];
 			sprintf_s(title, 25, "Framerate %.1f", frames[frames.size() - 1]);
@@ -112,6 +140,4 @@ update_status ModuleEditor::Update(float dt)
 
 		ImGui::End();
 	}
-	
-	return UPDATE_CONTINUE;
 }
