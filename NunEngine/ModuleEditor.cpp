@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleEditor.h"
+#include "Console.h"
 
 #include "Imgui\imgui.h"
 
@@ -34,8 +35,11 @@ bool ModuleEditor::CleanUp()
 // Update
 update_status ModuleEditor::Update(float dt)
 {
-	//Create the menu bar
-	MenuMainBar();
+	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_UP)
+		console->SetActive();
+	console->Draw();
+
+	MenuMainBar();		
 	
 	if (want_to_close)
 		return UPDATE_STOP;

@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "Application.h"
+#include "Console.h"
 #include "Globals.h"
 
 #include "SDL/include/SDL.h"
@@ -15,13 +16,15 @@ enum main_states
 	MAIN_EXIT
 };
 
+Application* App = NULL;
+Console* console = NULL;
+
 int main(int argc, char ** argv)
 {
 	LOG("Starting game '%s'...", TITLE);
 
 	int main_return = EXIT_FAILURE;
 	main_states state = MAIN_CREATION;
-	Application* App = NULL;
 
 	while (state != MAIN_EXIT)
 	{
@@ -31,6 +34,7 @@ int main(int argc, char ** argv)
 
 			LOG("-------------- Application Creation --------------");
 			App = new Application();
+			console = new Console();
 			state = MAIN_START;
 			break;
 
