@@ -34,3 +34,4 @@ enum update_status
 #define WIN_FULLSCREEN_DESKTOP false
 #define VSYNC true
 #define TITLE "NunEngine"
+#define GREEN ImVec4(0.1, 1, 0.1, 1)

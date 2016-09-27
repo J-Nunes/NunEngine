@@ -43,7 +43,7 @@ update_status ModuleEditor::Update(float dt)
 		return UPDATE_CONTINUE;
 }
 
-void ModuleEditor::FillBar(Timer &timer, const int &timer_check, vector<float> &container, float new_value)
+void ModuleEditor::FillBar(Timer &timer, int timer_check, vector<float> &container, float new_value)
 {
 	if (timer.Read() > timer_check)
 	{
@@ -114,7 +114,7 @@ void ModuleEditor::MenuHelp()
 
 void ModuleEditor::MenuView()
 {
-	FillBar(frame_timer, 1000, frames, App->GetFPS());
+	FillBar(frame_timer, 1, frames, App->GetFPS());
 	FillBar(ms_timer, 1, ms, App->GetFrameMs());
 
 	if (ImGui::BeginMenu("View"))
@@ -126,18 +126,52 @@ void ModuleEditor::MenuView()
 	}
 
 	if (configuration)
+		MenuConfig();
+}
+
+void ModuleEditor::MenuConfig()
+{
+	ImGui::Begin("Configuration");
+
+	if (ImGui::CollapsingHeader("Application"))
 	{
-		ImGui::Begin("Configuration");
+		char title[25];
+		sprintf_s(title, 25, "Framerate %.1f", frames[frames.size() - 1]);
+		ImGui::PlotHistogram("##framerate", &frames[0], frames.size(), 0, title, 0.0f, 100.0f, ImVec2(310, 100));
+		
+		if (ImGui::SliderInt("Max FPS", &fps, 0, 120, NULL))
+			App->SetMaxFPS(fps);
 
-		if (ImGui::CollapsingHeader("Application"))
-		{
-			char title[25];
-			sprintf_s(title, 25, "Framerate %.1f", frames[frames.size() - 1]);
-			ImGui::PlotHistogram("##framerate", &frames[0], frames.size(), 0, title, 0.0f, 100.0f, ImVec2(310, 100));
-			sprintf_s(title, 25, "Milliseconds %.1f", ms[ms.size() - 1]);
-			ImGui::PlotHistogram("##framerate", &ms[0], ms.size(), 0, title, 0.0f, 40.0f, ImVec2(310, 100));
-		}
-
-		ImGui::End();
+		sprintf_s(title, 25, "Milliseconds %.1f", ms[ms.size() - 1]);
+		ImGui::PlotHistogram("##framerate", &ms[0], ms.size(), 0, title, 0.0f, 40.0f, ImVec2(310, 100));		
 	}
+
+	if (ImGui::CollapsingHeader("Hardware"))
+	{
+		ImGui::Text("CPUs: ");
+		ImGui::SameLine(); ImGui::TextColored(GREEN, "%d (Cache: %dkb)", SDL_GetCPUCount(), SDL_GetCPUCacheLineSize());
+
+		ImGui::Text("System RAM: ");
+		ImGui::SameLine(); ImGui::TextColored(GREEN, "%.2fG", (float)SDL_GetSystemRAM() / 1000);
+
+		ImGui::Text("Caps: ");
+		ImGui::SameLine();
+		string buff = "";
+
+		if (SDL_Has3DNow) buff += "3DNow, ";
+		if (SDL_HasAVX) buff += "AVX, ";
+		//if (SDL_HasAVX2) buff += "AVX2, ";
+		if (SDL_HasAltiVec) buff += "AltiVec, ";
+		if (SDL_HasMMX) buff += "MMX, ";
+		if (SDL_HasRDTSC) buff += "RDTSC, ";
+		if (SDL_HasSSE) buff += "SSE, ";
+		if (SDL_HasSSE2) buff += "SSE2, ";
+		if (SDL_HasSSE3) buff += "SSE3, ";
+		if (SDL_HasSSE41) buff += "SSE41, ";
+		if (SDL_HasSSE41) buff += "SSE42, ";
+
+		ImGui::TextColored(GREEN, buff.c_str());
+	}
+
+	ImGui::End();
 }

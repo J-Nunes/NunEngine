@@ -52,9 +52,10 @@ public:
 	bool CleanUp();
 
 	void RequestBrowser(const char* url);
-	int GetFPS();
-	int GetFrameMs();
+	const int GetFPS();
+	const int GetFrameMs();
 	bool SecCounter();
+	void SetMaxFPS(const uint &fps);
 
 private:
 

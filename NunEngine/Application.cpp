@@ -162,12 +162,12 @@ void Application::RequestBrowser(const char* url)
 	ShellExecuteA(NULL, "open", url, NULL, NULL, NULL);
 }
 
-int Application::GetFPS()
+const int Application::GetFPS()
 {
 	return prev_last_sec_frame_count;
 }
 
-int Application::GetFrameMs()
+const int Application::GetFrameMs()
 {
 	return last_frame_ms;
 }
@@ -175,4 +175,12 @@ int Application::GetFrameMs()
 bool Application::SecCounter()
 {
 	return (last_sec_frame_time.Read() > 1000);
+}
+
+void Application::SetMaxFPS(const uint & fps)
+{
+	if (fps != 0)
+		capped_ms = 1000 / fps;
+	else
+		capped_ms = 1000 / -1;
 }

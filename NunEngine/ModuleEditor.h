@@ -17,12 +17,13 @@ public:
 	bool				CleanUp();
 
 private:
-	void				FillBar(Timer &timer, const int &timer_check,vector<float> &container, float new_value);
+	void				FillBar(Timer &timer, int timer_check, vector<float> &container, float new_value);
 	void				CloseApp();
 	void				MenuMainBar();
 	void				MenuFile();
 	void				MenuHelp();
 	void				MenuView();
+	void				MenuConfig();
 
 public:
 
@@ -35,5 +36,6 @@ private:
 	Timer				ms_timer;
 	vector<float>		ms;
 	vector<float>		frames;
+	int					fps = 60;
 
 };
