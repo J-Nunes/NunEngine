@@ -160,7 +160,6 @@ void ModuleEditor::MenuConfig()
 
 		if (SDL_Has3DNow) buff += "3DNow, ";
 		if (SDL_HasAVX) buff += "AVX, ";
-		//if (SDL_HasAVX2) buff += "AVX2, ";
 		if (SDL_HasAltiVec) buff += "AltiVec, ";
 		if (SDL_HasMMX) buff += "MMX, ";
 		if (SDL_HasRDTSC) buff += "RDTSC, ";
