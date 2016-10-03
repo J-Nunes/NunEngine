@@ -1,5 +1,4 @@
 #include "PhysBody3D.h"
-#include "glmath.h"
 #include "Bullet\include\btBulletDynamicsCommon.h"
 // =================================================
 PhysBody3D::PhysBody3D(btRigidBody* body) : body(body)
@@ -85,9 +84,9 @@ void PhysBody3D::SetBounciness(float restitution, float friction)
 }
 
 //----------------------------------------------------------
-vec3 PhysBody3D::GetPosition()const
+glm::vec3 PhysBody3D::GetPosition()const
 {
-	vec3 ret;
+	glm::vec3 ret;
 	ret.x = body->getWorldTransform().getOrigin().getX();
 	ret.y = body->getWorldTransform().getOrigin().getY();
 	ret.z = body->getWorldTransform().getOrigin().getZ();
