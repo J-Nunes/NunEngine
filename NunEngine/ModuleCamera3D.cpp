@@ -7,16 +7,20 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
+#include "glm\gtc\type_ptr.hpp"
+#include "glm\gtc\matrix_transform.hpp"
+#include "glm\gtx\rotate_vector.hpp"
+
 ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	CalculateViewMatrix();
 
-	X = vec3(1.0f, 0.0f, 0.0f);
-	Y = vec3(0.0f, 1.0f, 0.0f);
-	Z = vec3(0.0f, 0.0f, 1.0f);
+	X = glm::vec3(1.0f, 0.0f, 0.0f);
+	Y = glm::vec3(0.0f, 1.0f, 0.0f);
+	Z = glm::vec3(0.0f, 0.0f, 1.0f);
 
-	Position = vec3(0.0f, 0.0f, 5.0f);
-	Reference = vec3(0.0f, 0.0f, 0.0f);
+	Position = glm::vec3(0.0f, 0.0f, 5.0f);
+	Reference = glm::vec3(0.0f, 0.0f, 0.0f);
 }
 
 ModuleCamera3D::~ModuleCamera3D()
@@ -106,14 +110,14 @@ update_status ModuleCamera3D::Update(float dt)
 }
 
 // -----------------------------------------------------------------
-void ModuleCamera3D::Look(const vec3 &Position, const vec3 &Reference, bool RotateAroundReference)
+void ModuleCamera3D::Look(const  glm::vec3 &Position, const  glm::vec3 &Reference, bool RotateAroundReference)
 {
 	this->Position = Position;
 	this->Reference = Reference;
 
-	Z = normalize(Position - Reference);
-	X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Z));
-	Y = cross(Z, X);
+	Z = glm::normalize(Position - Reference);
+	X = glm::normalize(cross(glm::vec3(0.0f, 1.0f, 0.0f), Z));
+	Y = glm::cross(Z, X);
 
 	if(!RotateAroundReference)
 	{
@@ -125,12 +129,12 @@ void ModuleCamera3D::Look(const vec3 &Position, const vec3 &Reference, bool Rota
 }
 
 // -----------------------------------------------------------------
-void ModuleCamera3D::LookAt( const vec3 &Spot)
+void ModuleCamera3D::LookAt(const glm::vec3 &Spot)
 {
 	Reference = Spot;
 
 	Z = normalize(Position - Reference);
-	X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Z));
+	X = glm::normalize(cross(glm::vec3(0.0f, 1.0f, 0.0f), Z));
 	Y = cross(Z, X);
 
 	CalculateViewMatrix();
@@ -138,7 +142,7 @@ void ModuleCamera3D::LookAt( const vec3 &Spot)
 
 
 // -----------------------------------------------------------------
-void ModuleCamera3D::Move(const vec3 &Movement)
+void ModuleCamera3D::Move(const glm::vec3 &Movement)
 {
 	Position += Movement;
 	Reference += Movement;
@@ -148,7 +152,7 @@ void ModuleCamera3D::Move(const vec3 &Movement)
 // ------------------------------------------------------------------
 void ModuleCamera3D::Move(Direction d, float speed)
 {
-	vec3 newPos(0, 0, 0);
+	glm::vec3 newPos(0, 0, 0);
 	switch (d)
 	{
 	case GO_RIGHT:
@@ -176,13 +180,13 @@ void ModuleCamera3D::Move(Direction d, float speed)
 // -----------------------------------------------------------------
 float* ModuleCamera3D::GetViewMatrix()
 {
-	return &ViewMatrix;
+	return glm::value_ptr(ViewMatrix);
 }
 
 // -----------------------------------------------------------------
 void ModuleCamera3D::CalculateViewMatrix()
 {
-	ViewMatrix = mat4x4(X.x, Y.x, Z.x, 0.0f, X.y, Y.y, Z.y, 0.0f, X.z, Y.z, Z.z, 0.0f, -dot(X, Position), -dot(Y, Position), -dot(Z, Position), 1.0f);
+	ViewMatrix = glm::mat4x4(X.x, Y.x, Z.x, 0.0f, X.y, Y.y, Z.y, 0.0f, X.z, Y.z, Z.z, 0.0f, -dot(X, Position), -dot(Y, Position), -dot(Z, Position), 1.0f);
 	ViewMatrixInverse = inverse(ViewMatrix);
 }
 
@@ -199,9 +203,9 @@ void ModuleCamera3D::Rotate(float x, float y)
 	{
 		float DeltaX = (float)dx * Sensitivity;
 
-		X = rotate(X, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-		Y = rotate(Y, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-		Z = rotate(Z, DeltaX, vec3(0.0f, 1.0f, 0.0f));
+		X = rotate(X, DeltaX, Y);
+		Y = rotate(Y, DeltaX, Y);
+		Z = rotate(Z, DeltaX, Y);
 	}
 
 	if (dy != 0)
@@ -213,7 +217,7 @@ void ModuleCamera3D::Rotate(float x, float y)
 
 		if (Y.y < 0.0f)
 		{
-			Z = vec3(0.0f, Z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
+			Z = glm::vec3(0.0f, Z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
 			Y = cross(Z, X);
 		}
 	}
@@ -224,13 +228,23 @@ void ModuleCamera3D::Rotate(float x, float y)
 }
 // -----------------------------------------------------------------
 
-void ModuleCamera3D::From3Dto2D(vec3 point, int& x, int& y)
+void ModuleCamera3D::From3Dto2D(glm::vec3 point, int& x, int& y)
 {
-	mat4x4 projection;
-	projection = perspective(60.0f, (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.125f, 512.0f);
+	glm::mat4x4 projection;
+	float coty = 1.0f / tan(60.0f * (float)M_PI / 360.0f);
+	projection[0][0] = coty / ((float)SCREEN_WIDTH / (float)SCREEN_HEIGHT);
+	projection[1][1] = coty;
+	projection[2][2] = (0.125f + 512.0f) / (0.125f - 512.0f);
+	projection[2][3] = -1.0f;
+	projection[3][2] = 2.0f * 0.125f * 512.0f / (0.125f - 512.0f);
+	projection[3][3] = 0.0f;
 
-	vec3 screen = multiply(point, ViewMatrix);
+	glm::vec3 screen = multiply(point, ViewMatrix);
 	screen = multiply(screen, projection);
+	/*ret.x = mat.M[0] * u.x + mat.M[4] * u.y + mat.M[8] * u.z + mat.M[12] * 1;
+	ret.y = mat.M[1] * u.x + mat.M[5] * u.y + mat.M[9] * u.z + mat.M[13] * 1;
+	ret.z = mat.M[2] * u.x + mat.M[6] * u.y + mat.M[10] * u.z + mat.M[14] * 1;*/
+	
 
 	screen.x /= screen.z;
 	screen.y /= screen.z;

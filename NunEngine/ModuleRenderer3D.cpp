@@ -12,6 +12,7 @@
 
 #include "Imgui\imgui.h"
 #include "Imgui\imgui_impl_sdl_gl3.h"
+#include "glm\gtc\type_ptr.hpp"
 
 
 ModuleRenderer3D::ModuleRenderer3D(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -160,8 +161,18 @@ void ModuleRenderer3D::OnResize(int width, int height, float fovy)
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	ProjectionMatrix = perspective(fovy, (float)width / (float)height, 0.125f, 512.0f);
-	glLoadMatrixf(&ProjectionMatrix);
+
+	float coty = 1.0f / tan(60.0f * (float)M_PI / 360.0f);
+
+	ProjectionMatrix[0][0] = coty / ((float)width / (float)height);
+	ProjectionMatrix[1][1] = coty;
+	ProjectionMatrix[2][2] = (0.125f + 512.0f) / (0.125f - 512.0f);
+	ProjectionMatrix[2][3] = -1.0f;
+	ProjectionMatrix[3][2] = 2.0f * 0.125f * 512.0f / (0.125f - 512.0f);
+	ProjectionMatrix[3][3] = 0.0f;
+
+	//ProjectionMatrix = perspective(fovy, (float)width / (float)height, 0.125f, 512.0f);
+	glLoadMatrixf(glm::value_ptr(ProjectionMatrix));
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
