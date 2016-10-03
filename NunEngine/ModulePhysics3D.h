@@ -3,6 +3,7 @@
 #include "Globals.h"
 #include <list>
 #include "Primitive.h"
+#include "glm\glm.hpp"
 
 #include "Bullet\include\btBulletDynamicsCommon.h"
 // Recommended scale is 1.0f == 1 meter, no less than 0.2 objects
@@ -30,8 +31,8 @@ public:
 	PhysBody3D* AddBody(const Cube& cube, float mass = 1.0f, bool isSensor = false);
 	PhysBody3D* AddBody(const Cylinder& cylinder, float mass = 1.0f, bool isSensor = false);
 
-	void AddConstraintP2P(PhysBody3D& bodyA, PhysBody3D& bodyB, const vec3& anchorA, const vec3& anchorB);
-	void AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, const vec3& anchorA, const vec3& anchorB, const vec3& axisS, const vec3& axisB, bool disable_collision = false);
+	void AddConstraintP2P(PhysBody3D& bodyA, PhysBody3D& bodyB, const glm::vec3& anchorA, const glm::vec3& anchorB);
+	void AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, const glm::vec3& anchorA, const glm::vec3& anchorB, const glm::vec3& axisS, const glm::vec3& axisB, bool disable_collision = false);
 
 private:
 

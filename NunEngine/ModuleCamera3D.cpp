@@ -239,12 +239,15 @@ void ModuleCamera3D::From3Dto2D(glm::vec3 point, int& x, int& y)
 	projection[3][2] = 2.0f * 0.125f * 512.0f / (0.125f - 512.0f);
 	projection[3][3] = 0.0f;
 
-	glm::vec3 screen = multiply(point, ViewMatrix);
-	screen = multiply(screen, projection);
-	/*ret.x = mat.M[0] * u.x + mat.M[4] * u.y + mat.M[8] * u.z + mat.M[12] * 1;
-	ret.y = mat.M[1] * u.x + mat.M[5] * u.y + mat.M[9] * u.z + mat.M[13] * 1;
-	ret.z = mat.M[2] * u.x + mat.M[6] * u.y + mat.M[10] * u.z + mat.M[14] * 1;*/
-	
+	//glm::vec3 screen = multiply(point, ViewMatrix);
+	glm::vec3 screen;
+	screen.x = ViewMatrix[0].x * point.x + ViewMatrix[1].x * point.y + ViewMatrix[2].x * point.z + ViewMatrix[3].x;
+	screen.y = ViewMatrix[0].y * point.x + ViewMatrix[1].y * point.y + ViewMatrix[2].y * point.z + ViewMatrix[3].y;
+	screen.z = ViewMatrix[0].z * point.x + ViewMatrix[1].z * point.y + ViewMatrix[2].z * point.z + ViewMatrix[3].z;
+	//screen = multiply(screen, projection);
+	screen.x = projection[0].x * screen.x + projection[1].x * screen.y + projection[2].x * screen.z + projection[3].x;
+	screen.y = projection[0].y * screen.x + projection[1].y * screen.y + projection[2].y * screen.z + projection[3].y;
+	screen.z = projection[0].z * screen.x + projection[1].z * screen.y + projection[2].z * screen.z + projection[3].z;	
 
 	screen.x /= screen.z;
 	screen.y /= screen.z;

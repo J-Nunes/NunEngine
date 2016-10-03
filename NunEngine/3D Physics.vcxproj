@@ -76,7 +76,6 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Console.h" />
-    <ClInclude Include="glmath.h" />
     <ClInclude Include="glm\common.hpp" />
     <ClInclude Include="glm\detail\func_common.hpp" />
     <ClInclude Include="glm\detail\func_exponential.hpp" />
@@ -252,7 +251,6 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Console.cpp" />
-    <ClCompile Include="glmath.cpp" />
     <ClCompile Include="glm\detail\glm.cpp" />
     <ClCompile Include="Imgui\imgui.cpp" />
     <ClCompile Include="Imgui\imgui_demo.cpp" />
