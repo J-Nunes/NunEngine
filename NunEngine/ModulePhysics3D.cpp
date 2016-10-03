@@ -3,6 +3,8 @@
 #include "ModulePhysics3D.h"
 #include "PhysBody3D.h"
 #include "Primitive.h"
+#include "glm/gtc/type_ptr.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 
 #ifdef _DEBUG
 	#pragma comment (lib, "Bullet/libx86/BulletDynamics_debug.lib")
@@ -185,7 +187,7 @@ PhysBody3D* ModulePhysics3D::AddBody(const Sphere& sphere, float mass, bool isSe
 	shapes.push_back(colShape);
 
 	btTransform startTransform;
-	startTransform.setFromOpenGLMatrix(&sphere.transform);
+	startTransform.setFromOpenGLMatrix(glm::value_ptr(sphere.transform));
 
 	btVector3 localInertia(0, 0, 0);
 	if(mass != 0.f)
@@ -216,7 +218,7 @@ PhysBody3D* ModulePhysics3D::AddBody(const Cube& cube, float mass, bool isSensor
 	shapes.push_back(colShape);
 
 	btTransform startTransform;
-	startTransform.setFromOpenGLMatrix(&cube.transform);
+	startTransform.setFromOpenGLMatrix(glm::value_ptr(cube.transform));
 
 	btVector3 localInertia(0, 0, 0);
 	if(mass != 0.f)
@@ -246,7 +248,7 @@ PhysBody3D* ModulePhysics3D::AddBody(const Cylinder& cylinder, float mass, bool 
 	shapes.push_back(colShape);
 
 	btTransform startTransform;
-	startTransform.setFromOpenGLMatrix(&cylinder.transform);
+	startTransform.setFromOpenGLMatrix(glm::value_ptr(cylinder.transform));
 
 	btVector3 localInertia(0, 0, 0);
 	if(mass != 0.f)
@@ -300,15 +302,20 @@ void ModulePhysics3D::AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, c
 // =============================================
 void DebugDrawer::drawLine(const btVector3& from, const btVector3& to, const btVector3& color)
 {
-	line.origin.Set(from.getX(), from.getY(), from.getZ());
-	line.destination.Set(to.getX(), to.getY(), to.getZ());
+	line.origin.x = from.getX();
+	line.origin.y = from.getY();
+	line.origin.z = from.getZ();
+	line.destination.x = from.getX();
+	line.destination.y = from.getY();
+	line.destination.z = from.getZ();
 	line.color.Set(color.getX(), color.getY(), color.getZ());
 	line.Render();
 }
 
 void DebugDrawer::drawContactPoint(const btVector3& PointOnB, const btVector3& normalOnB, btScalar distance, int lifeTime, const btVector3& color)
 {
-	point.transform.translate(PointOnB.getX(), PointOnB.getY(), PointOnB.getZ());
+	glm::vec3 pos(PointOnB.getX(), PointOnB.getY(), PointOnB.getZ());
+	glm::translate(point.transform, pos);
 	point.color.Set(color.getX(), color.getY(), color.getZ());
 	point.Render();
 }

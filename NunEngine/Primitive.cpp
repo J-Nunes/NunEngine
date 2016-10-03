@@ -5,10 +5,13 @@
 #include "Primitive.h"
 #include "glut/glut.h"
 
+#include "glm/gtc/type_ptr.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+
 #pragma comment (lib, "glut/glut32.lib")
 
 // ------------------------------------------------------------
-Primitive::Primitive() : transform(IdentityMatrix), color(White), wire(false), axis(false), type(PrimitiveTypes::Primitive_Point)
+Primitive::Primitive() : transform(1.0f), color(White), wire(false), axis(false), type(PrimitiveTypes::Primitive_Point)
 {}
 
 // ------------------------------------------------------------
@@ -21,7 +24,7 @@ PrimitiveTypes Primitive::GetType() const
 void Primitive::Render() const
 {
 	glPushMatrix();
-	glMultMatrixf(transform.M);
+	glMultMatrixf(glm::value_ptr(transform));
 
 	if(axis == true)
 	{
@@ -84,28 +87,30 @@ void Primitive::InnerRender() const
 // ------------------------------------------------------------
 void Primitive::SetPos(float x, float y, float z)
 {
-	transform.translate(x, y, z);
+	glm::vec3 pos(x, y, z);
+	glm::translate(transform, pos);
 }
 
 // ------------------------------------------------------------
-void Primitive::SetRotation(float angle, const vec3 &u)
+void Primitive::SetRotation(float angle, const glm::vec3 &u)
 {
-	transform.rotate(angle, u);
+	glm::rotate(transform, angle, u);
 }
 
 // ------------------------------------------------------------
 void Primitive::Scale(float x, float y, float z)
 {
-	transform.scale(x, y, z);
+	glm::vec3 scale(x, y, z);
+	glm::scale(transform, scale);
 }
 
 // ------------------------------------------------------------
-vec3 Primitive::GetPos()const
+glm::vec3 Primitive::GetPos()const
 {
-	vec3 ret;
-	ret.x = transform.M[12];
-	ret.y = transform.M[13];
-	ret.z = transform.M[14];
+	glm::vec3 ret;
+	ret.x = transform[3].x;
+	ret.y = transform[3].y;
+	ret.z = transform[3].z;
 
 	return ret;
 }
