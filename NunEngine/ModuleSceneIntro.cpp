@@ -3,6 +3,7 @@
 #include "ModuleSceneIntro.h"
 #include "Primitive.h"
 #include "PhysBody3D.h"
+#include "ModuleRenderer3D.h"
 
 #include "Imgui\imgui.h"
 
@@ -21,7 +22,7 @@ bool ModuleSceneIntro::Start()
 	LOG("Loading Intro assets");
 	bool ret = true;
 
-	
+	vertex = App->renderer3D->CubeIndices();
 
 	return ret;
 }
@@ -38,6 +39,7 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update(float dt)
 {
 	p.Render();
+	App->renderer3D->DrawCubeIndices(vertex);
 
 	return UPDATE_CONTINUE;
 }

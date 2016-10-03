@@ -21,5 +21,6 @@ public:
 
 private:
 	Plane p;
+	uint vertex = 0;
 	
 };

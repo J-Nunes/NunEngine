@@ -154,6 +154,229 @@ bool ModuleRenderer3D::CleanUp()
 	return true;
 }
 
+void ModuleRenderer3D::CubePaintDirectMode()
+{
+	glBegin(GL_TRIANGLES);
+
+	glColor3f(255.f, 0.f, 0.f);
+
+	glVertex3f(0.f, 0.f, 0.f);//A
+	glVertex3f(5.f, 0.f, 0.f);//B
+	glVertex3f(5.f, 5.f, 0.f);//C
+
+	glVertex3f(5.f, 5.f, 0.f);//C
+	glVertex3f(0.f, 5.f, 0.f);//D
+	glVertex3f(0.f, 0.f, 0.f);//A
+
+	glColor3f(0.f, 255.f, 0.f);
+
+	glVertex3f(5.f, 0.f, 0.f);//B
+	glVertex3f(5.f, 0.f, -5.f);//E
+	glVertex3f(5.f, 5.f, -5.f);//F
+
+	glVertex3f(5.f, 5.f, -5.f);//F
+	glVertex3f(5.f, 5.f, 0.f);//C
+	glVertex3f(5.f, 0.f, 0.f);//B
+
+	glColor3f(0.f, 0.f, 255.f);
+
+	glVertex3f(5.f, 0.f, -5.f);//E
+	glVertex3f(0.f, 0.f, -5.f);//G
+	glVertex3f(5.f, 5.f, -5.f);//F
+
+	glVertex3f(5.f, 5.f, -5.f);//F
+	glVertex3f(0.f, 0.f, -5.f);//G
+	glVertex3f(0.f, 5.f, -5.f);//H
+
+	glColor3f(125.f, 125.f, 0.f);
+
+	glVertex3f(0.f, 5.f, -5.f);//F
+	glVertex3f(0.f, 0.f, -5.f);//E
+	glVertex3f(0.f, 0.f, 0.f);//B
+
+	glVertex3f(0.f, 0.f, 0.f);//B
+	glVertex3f(0.f, 5.f, 0.f);//C
+	glVertex3f(0.f, 5.f, -5.f);//F
+
+	glColor3f(0.f, 125.f, 125.f);
+
+	glVertex3f(0.f, 5.f, 0.f);//D
+	glVertex3f(5.f, 5.f, 0.f);//C
+	glVertex3f(5.f, 5.f, -5.f);//F
+
+	glVertex3f(0.f, 5.f, 0.f);//D
+	glVertex3f(5.f, 5.f, -5.f);//F
+	glVertex3f(0.f, 5.f, -5.f);//H
+
+	glColor3f(125.f, 0.f, 125.f);
+
+	glVertex3f(0.f, 0.f, 0.f);//D
+	glVertex3f(5.f, 0.f, -5.f);//F
+	glVertex3f(5.f, 0.f, 0.f);//C
+
+	glVertex3f(0.f, 0.f, 0.f);//D
+	glVertex3f(0.f, 0.f, -5.f);//H
+	glVertex3f(5.f, 0.f, -5.f);//F
+	glEnd();
+}
+
+uint ModuleRenderer3D::CubeVertexArray()
+{
+	vector<glm::vec3> vertices;
+
+	//FRONT
+	vertices.push_back(glm::vec3(0.f, 0.f, 0.f));//A
+	vertices.push_back(glm::vec3(5.f, 0.f, 0.f));//B
+	vertices.push_back(glm::vec3(5.f, 5.f, 0.f));//C
+
+	vertices.push_back(glm::vec3(5.f, 5.f, 0.f));//C
+	vertices.push_back(glm::vec3(0.f, 5.f, 0.f));//D
+	vertices.push_back(glm::vec3(0.f, 0.f, 0.f));//A
+
+	//RIGHT SIDE									   
+	vertices.push_back(glm::vec3(5.f, 0.f, 0.f));//B
+	vertices.push_back(glm::vec3(5.f, 0.f, -5.f));//E
+	vertices.push_back(glm::vec3(5.f, 5.f, -5.f));//F
+
+	vertices.push_back(glm::vec3(5.f, 5.f, -5.f));//F
+	vertices.push_back(glm::vec3(5.f, 5.f, 0.f));//C
+	vertices.push_back(glm::vec3(5.f, 0.f, 0.f));//B
+
+	//BACK									   
+	vertices.push_back(glm::vec3(5.f, 0.f, -5.f));//E
+	vertices.push_back(glm::vec3(0.f, 0.f, -5.f));//G
+	vertices.push_back(glm::vec3(5.f, 5.f, -5.f));//F
+
+	vertices.push_back(glm::vec3(5.f, 5.f, -5.f));//F
+	vertices.push_back(glm::vec3(0.f, 0.f, -5.f));//G
+	vertices.push_back(glm::vec3(0.f, 5.f, -5.f));//H
+
+	//LEFT SIDE										
+	vertices.push_back(glm::vec3(0.f, 5.f, -5.f));//H
+	vertices.push_back(glm::vec3(0.f, 0.f, -5.f));//G
+	vertices.push_back(glm::vec3(0.f, 0.f, 0.f));//A
+
+	vertices.push_back(glm::vec3(0.f, 0.f, 0.f));//A
+	vertices.push_back(glm::vec3(0.f, 5.f, 0.f));//D
+	vertices.push_back(glm::vec3(0.f, 5.f, -5.f));//H
+
+	//TOP										
+	vertices.push_back(glm::vec3(0.f, 5.f, 0.f));//D
+	vertices.push_back(glm::vec3(5.f, 5.f, 0.f));//C
+	vertices.push_back(glm::vec3(5.f, 5.f, -5.f));//F
+
+	vertices.push_back(glm::vec3(0.f, 5.f, 0.f));//D
+	vertices.push_back(glm::vec3(5.f, 5.f, -5.f));//F
+	vertices.push_back(glm::vec3(0.f, 5.f, -5.f));//H
+
+	//BOTTOM										
+	vertices.push_back(glm::vec3(0.f, 0.f, 0.f));//A
+	vertices.push_back(glm::vec3(5.f, 0.f, -5.f));//E
+	vertices.push_back(glm::vec3(5.f, 0.f, 0.f));//B
+
+	vertices.push_back(glm::vec3(0.f, 0.f, 0.f));//A
+	vertices.push_back(glm::vec3(0.f, 0.f, -5.f));//G
+	vertices.push_back(glm::vec3(5.f, 0.f, -5.f));//E
+
+	glGenBuffers(1, (GLuint*) &(my_id));
+	glBindBuffer(GL_ARRAY_BUFFER, my_id);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float)*vertices.size() * 3, vertices.data(), GL_STATIC_DRAW);
+
+	return vertices.size();
+}
+
+void ModuleRenderer3D::DrawCubeVertexArray(uint size)
+{
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glBindBuffer(GL_ARRAY_BUFFER, my_id);
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
+	// ... draw other buffers
+	glDrawArrays(GL_TRIANGLES, 0, size * 3);
+	glDisableClientState(GL_VERTEX_ARRAY);
+}
+
+uint ModuleRenderer3D::CubeIndices()
+{
+	vector<glm::vec3> vertex;
+
+	vertex.push_back(glm::vec3(5.f, 5.f, 0.f));//C 0
+	vertex.push_back(glm::vec3(0.f, 5.f, 0.f));//D 1
+	vertex.push_back(glm::vec3(0.f, 0.f, 0.f));//A 2
+	vertex.push_back(glm::vec3(5.f, 0.f, 0.f));//B 3
+	vertex.push_back(glm::vec3(5.f, 0.f, -5.f));//E 4
+	vertex.push_back(glm::vec3(5.f, 5.f, -5.f));//F 5
+	vertex.push_back(glm::vec3(0.f, 5.f, -5.f));//H 6
+	vertex.push_back(glm::vec3(0.f, 0.f, -5.f));//G 7
+
+	glGenBuffers(1, (GLuint*) &(my_id));
+	glBindBuffer(GL_ARRAY_BUFFER, my_id);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float)*vertex.size() * 3, vertex.data(), GL_STATIC_DRAW);
+
+	vector<uint> indices;
+
+	indices.push_back(0);
+	indices.push_back(1);
+	indices.push_back(2);
+
+	indices.push_back(2);
+	indices.push_back(3);
+	indices.push_back(0);
+
+	indices.push_back(0);
+	indices.push_back(3);
+	indices.push_back(4);
+
+	indices.push_back(4);
+	indices.push_back(5);
+	indices.push_back(0);
+
+	indices.push_back(0);
+	indices.push_back(5);
+	indices.push_back(6);
+
+	indices.push_back(6);
+	indices.push_back(1);
+	indices.push_back(0);
+
+	indices.push_back(1);
+	indices.push_back(6);
+	indices.push_back(7);
+
+	indices.push_back(7);
+	indices.push_back(2);
+	indices.push_back(1);
+
+	indices.push_back(7);
+	indices.push_back(4);
+	indices.push_back(3);
+
+	indices.push_back(3);
+	indices.push_back(2);
+	indices.push_back(7);
+
+	indices.push_back(4);
+	indices.push_back(7);
+	indices.push_back(6);
+
+	indices.push_back(6);
+	indices.push_back(5);
+	indices.push_back(4);
+
+	glGenBuffers(1, (GLuint*) &(my_indices));
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint)*indices.size(), indices.data(), GL_STATIC_DRAW);
+
+	return indices.size();
+}
+
+void ModuleRenderer3D::DrawCubeIndices(uint size)
+{
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
+	glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, NULL);
+	glDisableClientState(GL_VERTEX_ARRAY);
+}
 
 void ModuleRenderer3D::OnResize(int width, int height, float fovy)
 {

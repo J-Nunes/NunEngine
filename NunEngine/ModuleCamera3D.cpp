@@ -19,8 +19,8 @@ ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(ap
 	Y = glm::vec3(0.0f, 1.0f, 0.0f);
 	Z = glm::vec3(0.0f, 0.0f, 1.0f);
 
-	Position = glm::vec3(0.0f, 0.0f, 5.0f);
-	Reference = glm::vec3(0.0f, 0.0f, 0.0f);
+	Position = glm::vec3(7.0f, 7.0f, 7.0f);
+	Reference = glm::vec3(7.0f, 7.0f, 7.0f);
 }
 
 ModuleCamera3D::~ModuleCamera3D()
@@ -73,7 +73,7 @@ update_status ModuleCamera3D::Update(float dt)
 		int dx = -App->input->GetMouseXMotion();
 		int dy = -App->input->GetMouseYMotion();
 
-		float Sensitivity = 0.1f;
+		float Sensitivity = 0.01f;
 
 		Position -= Reference;
 

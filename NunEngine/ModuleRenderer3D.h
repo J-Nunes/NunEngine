@@ -17,12 +17,23 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
+	void CubePaintDirectMode();
+	uint CubeVertexArray();
+	void DrawCubeVertexArray(uint size);
+	uint CubeIndices();
+	void DrawCubeIndices(uint size);
+
 	void OnResize(int width, int height, float fovy);
 
 public:
-
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
 	glm::mat3x3 NormalMatrix;
 	glm::mat4x4 ModelMatrix, ViewMatrix, ProjectionMatrix;
+
+private:
+	uint indices_size;
+	uint my_indices = 0;
+	uint vertex_size;
+	uint my_id = 0;
 };
