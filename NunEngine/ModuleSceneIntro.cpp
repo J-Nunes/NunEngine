@@ -8,6 +8,8 @@
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
+	p = Plane(0, 1, 0, 0);
+	p.axis = true;
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -35,6 +37,8 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
+	p.Render();
+
 	return UPDATE_CONTINUE;
 }
 

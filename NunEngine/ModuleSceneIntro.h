@@ -18,5 +18,8 @@ public:
 	
 
 public:
+
+private:
+	Plane p;
 	
 };
