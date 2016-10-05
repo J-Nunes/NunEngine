@@ -660,6 +660,9 @@
     <ClInclude Include="Primitive.h">
       <Filter>Sources\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">

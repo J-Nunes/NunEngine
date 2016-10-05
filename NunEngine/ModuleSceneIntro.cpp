@@ -39,7 +39,7 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update(float dt)
 {
 	p.Render();
-	App->renderer3D->DrawCubeIndices(vertex);
+	//App->renderer3D->DrawCubeIndices(vertex);
 
 	return UPDATE_CONTINUE;
 }

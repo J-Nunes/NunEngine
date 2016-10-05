@@ -5,6 +5,7 @@
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
+#include "Mesh.h"
 
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
@@ -399,4 +400,87 @@ void ModuleRenderer3D::OnResize(int width, int height, float fovy)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+}
+
+bool ModuleRenderer3D::LoadMesh(Mesh* mesh)
+{
+	glGenBuffers(1, (GLuint*) &(mesh->id_vertices));
+	if (mesh->id_vertices == 0)
+	{
+		LOG("[error] Vertices buffer has not been binded!");
+		return false;
+	}
+	else
+	{
+		const uint num_vertices = mesh->num_vertices * 3;
+		float* vertices = new float[num_vertices];
+		for (uint i = 0, j = 0; i < mesh->num_vertices; i++, j++)
+		{
+			vertices[j] = mesh->vertices[i].x;
+			vertices[++j] = mesh->vertices[i].y;
+			vertices[++j] = mesh->vertices[i].z;
+		}
+
+		glBindBuffer(GL_ARRAY_BUFFER, mesh->id_vertices);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * num_vertices, vertices, GL_STATIC_DRAW);
+	}
+
+	// Normals
+	glGenBuffers(1, (GLuint*) &(mesh->id_normals));
+	if (mesh->id_normals == 0)
+	{
+		LOG("[error] Normals buffer has not been binded!");
+		return false;
+	}
+	else
+	{
+		const uint num_normals = mesh->num_normals * 3;
+		float* normals = new float[num_normals];
+		for (uint i = 0, j = 0; i < mesh->num_normals; i++, j++)
+		{
+			normals[j] = mesh->normals[i].x;
+			normals[++j] = mesh->normals[i].y;
+			normals[++j] = mesh->normals[i].z;
+		}
+
+		glBindBuffer(GL_ARRAY_BUFFER, mesh->id_normals);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * num_normals, normals, GL_STATIC_DRAW);
+	}
+
+	// Indices
+	glGenBuffers(1, (GLuint*) &(mesh->id_indices));
+	if (mesh->id_indices == 0)
+	{
+		LOG("[error] Indices buffer has not been binded!");
+		return false;
+	}
+	else
+	{
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->id_indices);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint)*mesh->num_indices, mesh->indices, GL_STATIC_DRAW);
+	}
+
+	return true;
+}
+
+void ModuleRenderer3D::DrawMesh(const Mesh * mesh)
+{
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_NORMAL_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glEnable(GL_TEXTURE_2D);
+
+	glBindBuffer(GL_ARRAY_BUFFER, mesh->id_vertices);
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
+
+	glBindBuffer(GL_ARRAY_BUFFER, mesh->id_normals);
+	glNormalPointer(GL_FLOAT, 0, NULL);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->id_indices);
+	glDrawElements(GL_TRIANGLES, mesh->num_indices, GL_UNSIGNED_INT, NULL);
+
+	glDisable(GL_TEXTURE_2D);
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_NORMAL_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }

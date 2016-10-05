@@ -6,6 +6,8 @@
 
 #define MAX_LIGHTS 8
 
+class Mesh;
+
 class ModuleRenderer3D : public Module
 {
 public:
@@ -24,6 +26,8 @@ public:
 	void DrawCubeIndices(uint size);
 
 	void OnResize(int width, int height, float fovy);
+	bool LoadMesh(Mesh* mesh);
+	void DrawMesh(const Mesh* mesh);
 
 public:
 	Light lights[MAX_LIGHTS];

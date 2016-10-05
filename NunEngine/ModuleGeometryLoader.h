@@ -2,6 +2,7 @@
 #define __MODULE_GEOMETRY_LOADER_H__
 
 #include "Module.h"
+#include <vector>
 
 class ModuleGeometryLoader : public Module
 {
@@ -15,9 +16,11 @@ public:
 	update_status		PostUpdate(float dt);
 	bool				CleanUp();
 
+	void				LoadGeometry(const char* path);
 
 private:
-	void				LoadGeometry(const char* path);
+	bool geometry_loaded = false;
+	std::vector<Mesh*> meshes;
 };
 
 #endif // !__MODULE_GEOMETRY_LOADER_H__

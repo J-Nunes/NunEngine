@@ -5,8 +5,8 @@
 #include "Primitive.h"
 #include "glut/glut.h"
 
-#include "glm/gtc/type_ptr.hpp"
-#include "glm/gtc/matrix_transform.hpp"
+#include "glm\gtc\type_ptr.hpp"
+#include "glm\gtc\matrix_transform.hpp"
 
 #pragma comment (lib, "glut/glut32.lib")
 
