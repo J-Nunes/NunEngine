@@ -2,7 +2,6 @@
 #include "Module.h"
 #include "Globals.h"
 #include <list>
-#include "p2Point.h"
 #include "glm\glm.hpp"
 
 #define PIXELS_PER_METER 50.0f // if touched change METER_PER_PIXEL too

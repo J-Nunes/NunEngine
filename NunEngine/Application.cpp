@@ -12,6 +12,7 @@ Application::Application()
 	camera = new ModuleCamera3D(this);
 	physics = new ModulePhysics3D(this);
 	editor = new ModuleEditor(this);
+	geometry_loader = new ModuleGeometryLoader(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -24,6 +25,7 @@ Application::Application()
 	AddModule(audio);
 	AddModule(physics);
 	AddModule(editor);
+	AddModule(geometry_loader);
 	
 	// Scenes
 	AddModule(scene_intro);

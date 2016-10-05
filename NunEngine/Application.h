@@ -13,6 +13,7 @@
 #include "ModuleCamera3D.h"
 #include "ModulePhysics3D.h"
 #include "ModuleEditor.h"
+#include "ModuleGeometryLoader.h"
 
 using namespace std; 
 
@@ -27,6 +28,7 @@ public:
 	ModuleCamera3D* camera;
 	ModulePhysics3D* physics;
 	ModuleEditor* editor;
+	ModuleGeometryLoader* geometry_loader;
 
 private:
 	list<Module*> list_modules;
