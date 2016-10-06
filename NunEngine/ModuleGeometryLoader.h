@@ -3,6 +3,8 @@
 
 #include "Module.h"
 #include <vector>
+#include "Globals.h"
+#include "Glew\include\glew.h"
 
 class ModuleGeometryLoader : public Module
 {
@@ -18,9 +20,14 @@ public:
 
 	void				LoadGeometry(const char* path);
 
+public:
+	uint* image_name;
+
 private:
 	bool geometry_loaded = false;
 	std::vector<Mesh*> meshes;
+
+	GLubyte checkImage[CHECKERS_HEIGHT][CHECKERS_WIDTH][4];
 };
 
 #endif // !__MODULE_GEOMETRY_LOADER_H__

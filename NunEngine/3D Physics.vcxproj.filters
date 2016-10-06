@@ -722,7 +722,6 @@
     <ClCompile Include="glm\detail\glm.cpp">
       <Filter>Resources\glm\detail</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleGeometryLoader.cpp" />
     <ClCompile Include="Color.cpp">
       <Filter>Sources\Tools</Filter>
     </ClCompile>
@@ -734,6 +733,9 @@
     </ClCompile>
     <ClCompile Include="Primitive.cpp">
       <Filter>Sources\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleGeometryLoader.cpp">
+      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1103,7 +1105,6 @@
     <None Include="Assimp\include\vector3.inl">
       <Filter>Resources\Assimp\include</Filter>
     </None>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="glm\CMakeLists.txt">

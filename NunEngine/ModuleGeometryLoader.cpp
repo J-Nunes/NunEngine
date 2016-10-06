@@ -24,6 +24,18 @@ bool ModuleGeometryLoader::Init()
 	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
 	aiAttachLogStream(&stream);
 
+	for (int i = 0; i < CHECKERS_HEIGHT; i++)
+	{
+		for (int j = 0; j < CHECKERS_WIDTH; j++)
+		{
+			int c = ((((i & 0x8) == 0) ^ (((j & 0x8)) == 0))) * 255;
+			checkImage[i][j][0] = (GLubyte)c;
+			checkImage[i][j][1] = (GLubyte)c;
+			checkImage[i][j][2] = (GLubyte)c;
+			checkImage[i][j][3] = (GLubyte)255;
+		}
+	}
+
 	return true;
 }
 
@@ -32,6 +44,16 @@ update_status ModuleGeometryLoader::PreUpdate(float dt)
 	if (geometry_loaded == false)
 	{
 		LoadGeometry("Brutus.fbx");
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		glGenTextures(1, image_name);
+		glBindTexture(GL_TEXTURE_2D, *image_name);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, CHECKERS_WIDTH, CHECKERS_HEIGHT,
+			0, GL_RGBA, GL_UNSIGNED_BYTE, checkImage);
+
 		geometry_loaded = true;
 	}
 
@@ -85,6 +107,15 @@ void ModuleGeometryLoader::LoadGeometry(const char * path)
 			mesh->normals = new glm::vec3[mesh->num_normals];
 			memcpy(mesh->normals, ai_mesh->mNormals, sizeof(glm::vec3) * mesh->num_normals);
 			LOG("  -> %d normals", mesh->num_normals);
+
+			uint UV_index = 0;
+ 			if (ai_mesh->HasTextureCoords(UV_index))
+ 			{
+ 				mesh->num_text = ai_mesh->mNumVertices;
+ 				mesh->text = new glm::vec2[mesh->num_text];
+				memcpy(mesh->text, ai_mesh->mTextureCoords[UV_index], sizeof(glm::vec2) * mesh->num_text);	
+ 				LOG("  -> %d texture coordinates", mesh->num_text);
+ 			}	
 
 			if (ai_mesh->HasFaces())
 			{

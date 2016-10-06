@@ -16,6 +16,10 @@ struct Mesh
 	uint id_normals = 0;
 	uint num_normals = 0;
 	glm::vec3* normals = nullptr;
+
+	uint id_text = 0;
+	uint num_text = 0;
+	glm::vec2* text = nullptr;
 };
 
 #endif __MESH_H__

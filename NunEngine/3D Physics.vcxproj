@@ -316,7 +316,6 @@
     <None Include="Assimp\include\quaternion.inl" />
     <None Include="Assimp\include\vector2.inl" />
     <None Include="Assimp\include\vector3.inl" />
-    <None Include="ClassDiagram.cd" />
     <None Include="glm\detail\func_common.inl" />
     <None Include="glm\detail\func_common_simd.inl" />
     <None Include="glm\detail\func_exponential.inl" />

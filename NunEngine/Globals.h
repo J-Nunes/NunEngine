@@ -12,6 +12,9 @@ void log(const char file[], int line, const char* format, ...);
 #define RADTODEG 57.295779513082320876f
 #define M_PI 3.14159265358979323846f
 
+#define CHECKERS_HEIGHT 128
+#define CHECKERS_WIDTH 128
+
 
 typedef unsigned int uint;
 

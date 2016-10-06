@@ -447,6 +447,27 @@ bool ModuleRenderer3D::LoadMesh(Mesh* mesh)
 		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * num_normals, normals, GL_STATIC_DRAW);
 	}
 
+	// Texture coordinates
+	glGenBuffers(1, (GLuint*) &(mesh->id_text));
+	if (mesh->id_text == 0)
+		{
+			LOG("[error] Texture coordinates buffer has not been binded!");
+			return false;
+		}
+	else
+		{
+			const uint num_text = mesh->num_text * 2;
+			float* textures = new float[num_text];
+			for (uint i = 0, j = 0; i < mesh->num_text; i++, j++)
+			{
+				textures[j] = mesh->text[i].x;
+				textures[++j] = mesh->text[i].y;
+			}
+
+			glBindBuffer(GL_ARRAY_BUFFER, mesh->id_text);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * num_text, textures, GL_STATIC_DRAW);
+		}
+
 	// Indices
 	glGenBuffers(1, (GLuint*) &(mesh->id_indices));
 	if (mesh->id_indices == 0)
@@ -475,6 +496,11 @@ void ModuleRenderer3D::DrawMesh(const Mesh * mesh)
 
 	glBindBuffer(GL_ARRAY_BUFFER, mesh->id_normals);
 	glNormalPointer(GL_FLOAT, 0, NULL);
+
+	glBindBuffer(GL_ARRAY_BUFFER, mesh->id_text);
+	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glBindTexture(GL_TEXTURE_2D, *App->geometry_loader->image_name);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->id_indices);
 	glDrawElements(GL_TRIANGLES, mesh->num_indices, GL_UNSIGNED_INT, NULL);
