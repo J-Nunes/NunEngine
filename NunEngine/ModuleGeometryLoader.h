@@ -21,7 +21,7 @@ public:
 	void				LoadGeometry(const char* path);
 
 public:
-	uint* image_name;
+	uint image_name = 0;
 
 private:
 	bool geometry_loaded = false;

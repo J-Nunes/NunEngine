@@ -45,8 +45,8 @@ update_status ModuleGeometryLoader::PreUpdate(float dt)
 	{
 		LoadGeometry("Brutus.fbx");
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-		glGenTextures(1, image_name);
-		glBindTexture(GL_TEXTURE_2D, *image_name);
+		glGenTextures(1, &image_name);
+		glBindTexture(GL_TEXTURE_2D, image_name);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);

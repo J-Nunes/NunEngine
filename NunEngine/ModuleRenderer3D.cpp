@@ -404,12 +404,11 @@ void ModuleRenderer3D::OnResize(int width, int height, float fovy)
 
 bool ModuleRenderer3D::LoadMesh(Mesh* mesh)
 {
+	// Vertices
 	glGenBuffers(1, (GLuint*) &(mesh->id_vertices));
 	if (mesh->id_vertices == 0)
-	{
-		LOG("[error] Vertices buffer has not been binded!");
 		return false;
-	}
+
 	else
 	{
 		const uint num_vertices = mesh->num_vertices * 3;
@@ -428,10 +427,8 @@ bool ModuleRenderer3D::LoadMesh(Mesh* mesh)
 	// Normals
 	glGenBuffers(1, (GLuint*) &(mesh->id_normals));
 	if (mesh->id_normals == 0)
-	{
-		LOG("[error] Normals buffer has not been binded!");
 		return false;
-	}
+
 	else
 	{
 		const uint num_normals = mesh->num_normals * 3;
@@ -450,10 +447,8 @@ bool ModuleRenderer3D::LoadMesh(Mesh* mesh)
 	// Texture coordinates
 	glGenBuffers(1, (GLuint*) &(mesh->id_text));
 	if (mesh->id_text == 0)
-		{
-			LOG("[error] Texture coordinates buffer has not been binded!");
 			return false;
-		}
+
 	else
 		{
 			const uint num_text = mesh->num_text * 2;
@@ -471,10 +466,8 @@ bool ModuleRenderer3D::LoadMesh(Mesh* mesh)
 	// Indices
 	glGenBuffers(1, (GLuint*) &(mesh->id_indices));
 	if (mesh->id_indices == 0)
-	{
-		LOG("[error] Indices buffer has not been binded!");
 		return false;
-	}
+
 	else
 	{
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->id_indices);
@@ -500,7 +493,7 @@ void ModuleRenderer3D::DrawMesh(const Mesh * mesh)
 	glBindBuffer(GL_ARRAY_BUFFER, mesh->id_text);
 	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
 	glBindTexture(GL_TEXTURE_2D, 0);
-	glBindTexture(GL_TEXTURE_2D, *App->geometry_loader->image_name);
+	glBindTexture(GL_TEXTURE_2D, App->geometry_loader->image_name);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->id_indices);
 	glDrawElements(GL_TRIANGLES, mesh->num_indices, GL_UNSIGNED_INT, NULL);
