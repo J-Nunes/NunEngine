@@ -5,6 +5,7 @@
 #include <string>
 #include "Globals.h"
 #include "ModuleGameObject.h"
+#include "Components.h"
 
 class GameObject 
 {
@@ -24,7 +25,7 @@ public:
 public:
 	std::string					tag;
 	std::vector<GameObject*>	children;
-	//std::vector<Component*> components;
+	std::vector<Component*>		components;
 
 private:
 	uint						id = 0;

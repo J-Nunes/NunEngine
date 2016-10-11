@@ -711,6 +711,9 @@
     <ClInclude Include="GameObject.h">
       <Filter>Sources\Tools\GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="Components.h">
+      <Filter>Sources\Tools\GameObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -791,6 +794,7 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Sources\Tools\GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="Components.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="glm\detail\func_common.inl">
