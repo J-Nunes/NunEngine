@@ -480,6 +480,8 @@ bool ModuleRenderer3D::LoadMesh(Mesh* mesh)
 
 void ModuleRenderer3D::DrawMesh(const Mesh * mesh)
 {
+	glColor4f(1, 1, 1, 1);
+
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);

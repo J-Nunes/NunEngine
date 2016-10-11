@@ -120,7 +120,11 @@ void ModuleGeometryLoader::LoadGeometry(const char * path)
  			{
  				mesh->num_text = ai_mesh->mNumVertices;
  				mesh->text = new glm::vec2[mesh->num_text];
-				memcpy(mesh->text, ai_mesh->mTextureCoords[UV_index], sizeof(glm::vec2) * mesh->num_text);	
+				for (int i = 0; i < mesh->num_text; i++)
+				{
+					mesh->text[i].x = ai_mesh->mTextureCoords[mesh->id_text][i].x;
+					mesh->text[i].y = ai_mesh->mTextureCoords[mesh->id_text][i].y;
+				}
  				LOG("  -> %d texture coordinates", mesh->num_text);
  			}	
 
