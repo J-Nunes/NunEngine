@@ -17,3 +17,18 @@ GameObject * GameObject::GetParent() const
 {
 	return parent;
 }
+
+void GameObject::Enable()
+{
+	active = true;
+}
+
+void GameObject::Disable()
+{
+	active = false;
+}
+
+const bool GameObject::IsActive()
+{
+	return active;
+}

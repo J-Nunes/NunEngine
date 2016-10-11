@@ -8,12 +8,18 @@
 
 class GameObject 
 {
+friend void ModuleGameObject::SetParent(GameObject* child, GameObject* parent);
+
 public:
 	GameObject(const uint _id, const char* name);
 	~GameObject();
 
-	bool Update();
-	GameObject* GetParent() const;
+	bool			Update();
+
+	GameObject*		GetParent() const;
+	void			Enable();
+	void			Disable();
+	const bool		IsActive();
 
 public:
 	std::string tag;
@@ -23,10 +29,7 @@ public:
 private:
 	uint id;
 	GameObject* parent;	
-	bool active;
-	
-
-	friend bool ModuleGameObject::SetParent(GameObject* child, GameObject* parent);
+	bool active;		
 };
 
 #endif __GAMEOBJECT_H__

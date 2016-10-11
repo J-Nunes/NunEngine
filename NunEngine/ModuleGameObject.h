@@ -17,7 +17,7 @@ public:
 	bool				CleanUp();
 
 	GameObject*			CreateGameObject(const char* name, GameObject* parent = nullptr);
-	bool				SetParent(GameObject* child, GameObject* parent);
+	void				SetParent(GameObject* child, GameObject* parent);
 
 private:
 	GameObject*			root = nullptr;

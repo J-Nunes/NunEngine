@@ -25,7 +25,7 @@ bool ModuleGameObject::CleanUp()
 	return true;
 }
 
-GameObject * ModuleGameObject::CreateGameObject(const char * name, GameObject * parent)
+GameObject * ModuleGameObject::CreateGameObject(const char* name, GameObject* parent)
 {
 	GameObject* ret = new GameObject(current_id++, name);
 
@@ -34,10 +34,8 @@ GameObject * ModuleGameObject::CreateGameObject(const char * name, GameObject * 
 	return ret;
 }
 
-bool ModuleGameObject::SetParent(GameObject * child, GameObject * parent)
+void ModuleGameObject::SetParent(GameObject* child, GameObject* parent)
 {
-	bool ret = false;
-
 	if (child && child != root)
 	{
 		//Remove child from its actual parent vector of children
@@ -61,9 +59,6 @@ bool ModuleGameObject::SetParent(GameObject * child, GameObject * parent)
 		{
 			child->parent = root;
 			root->children.push_back(child);
-		}
-
-		ret = true;		
+		}	
 	}
-	return ret;
 }
