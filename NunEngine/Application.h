@@ -14,6 +14,7 @@
 #include "ModulePhysics3D.h"
 #include "ModuleEditor.h"
 #include "ModuleGeometryLoader.h"
+#include "ModuleGameObject.h"
 
 using namespace std; 
 
@@ -29,6 +30,7 @@ public:
 	ModulePhysics3D* physics;
 	ModuleEditor* editor;
 	ModuleGeometryLoader* geometry_loader;
+	ModuleGameObject* game_object;
 
 private:
 	list<Module*> list_modules;

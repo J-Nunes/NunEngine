@@ -1,7 +1,7 @@
 #include "Application.h"
 
-#pragma comment (lib, "Devil/libx86/DevIL.lib")    /* link OpenGL Utility lib     */
-#pragma comment (lib, "Devil/libx86/ILU.lib") /* link Microsoft OpenGL lib   */
+#pragma comment (lib, "Devil/libx86/DevIL.lib") 
+#pragma comment (lib, "Devil/libx86/ILU.lib")
 #pragma comment (lib, "Devil/libx86/ILUT.lib") 
 
 #include "Devil\include\il.h"
@@ -21,6 +21,7 @@ Application::Application()
 	physics = new ModulePhysics3D(this);
 	editor = new ModuleEditor(this);
 	geometry_loader = new ModuleGeometryLoader(this);
+	game_object = new ModuleGameObject(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -34,6 +35,7 @@ Application::Application()
 	AddModule(physics);
 	AddModule(editor);
 	AddModule(geometry_loader);
+	AddModule(game_object);
 	
 	// Scenes
 	AddModule(scene_intro);

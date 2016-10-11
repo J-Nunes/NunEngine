@@ -117,6 +117,7 @@
     <ClInclude Include="Devil\include\ilut_config.h" />
     <ClInclude Include="Devil\include\ilu_region.h" />
     <ClInclude Include="Devil\include\il_wrap.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="glm\common.hpp" />
     <ClInclude Include="glm\detail\func_common.hpp" />
     <ClInclude Include="glm\detail\func_exponential.hpp" />
@@ -276,6 +277,7 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="ModuleCamera3D.h" />
     <ClInclude Include="ModuleEditor.h" />
+    <ClInclude Include="ModuleGameObject.h" />
     <ClInclude Include="ModuleGeometryLoader.h" />
     <ClInclude Include="ModulePhysics3D.h" />
     <ClInclude Include="ModuleRenderer3D.h" />
@@ -293,6 +295,7 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Console.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="glm\detail\glm.cpp" />
     <ClCompile Include="Imgui\imgui.cpp" />
     <ClCompile Include="Imgui\imgui_demo.cpp" />
@@ -304,6 +307,7 @@
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />
     <ClCompile Include="ModuleEditor.cpp" />
+    <ClCompile Include="ModuleGameObject.cpp" />
     <ClCompile Include="ModuleGeometryLoader.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModulePhysics3D.cpp" />

@@ -46,6 +46,18 @@
     <Filter Include="Resources\Devil\libx86">
       <UniqueIdentifier>{28e1ec2e-a1d5-47c4-9510-6bdc793b6c0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Tools\Timers">
+      <UniqueIdentifier>{b2a84333-e0d0-4396-977b-b32f8ec53b56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Tools\3D">
+      <UniqueIdentifier>{a26dc51c-965d-4d78-a9de-c874094ec112}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Tools\Physics">
+      <UniqueIdentifier>{f79a87f5-746b-4f3a-a99d-22651a840675}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Tools\GameObjects">
+      <UniqueIdentifier>{43874701-b8e1-422f-8ad6-39c0d4dee39c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -71,9 +83,6 @@
     </ClInclude>
     <ClInclude Include="Globals.h">
       <Filter>Sources</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>Sources\Tools</Filter>
     </ClInclude>
     <ClInclude Include="ModulePhysics3D.h">
       <Filter>Sources\Modules</Filter>
@@ -101,9 +110,6 @@
     </ClInclude>
     <ClInclude Include="ModuleEditor.h">
       <Filter>Sources\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="PerfTimer.h">
-      <Filter>Sources\Tools</Filter>
     </ClInclude>
     <ClInclude Include="Console.h">
       <Filter>Sources\Tools</Filter>
@@ -654,18 +660,6 @@
     <ClInclude Include="Color.h">
       <Filter>Sources\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="Light.h">
-      <Filter>Sources\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysBody3D.h">
-      <Filter>Sources\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="Primitive.h">
-      <Filter>Sources\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Sources\Tools</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleSceneIntro.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
@@ -693,6 +687,30 @@
     <ClInclude Include="Devil\include\ilut_config.h">
       <Filter>Resources\Devil\include</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleGameObject.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Sources\Tools\Timers</Filter>
+    </ClInclude>
+    <ClInclude Include="PerfTimer.h">
+      <Filter>Sources\Tools\Timers</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Sources\Tools\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Sources\Tools\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Primitive.h">
+      <Filter>Sources\Tools\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysBody3D.h">
+      <Filter>Sources\Tools\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Sources\Tools\GameObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -711,9 +729,6 @@
       <Filter>Sources\Modules</Filter>
     </ClCompile>
     <ClCompile Include="log.cpp">
-      <Filter>Sources\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="Timer.cpp">
       <Filter>Sources\Tools</Filter>
     </ClCompile>
     <ClCompile Include="Application.cpp">
@@ -740,9 +755,6 @@
     <ClCompile Include="ModuleEditor.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="PerfTimer.cpp">
-      <Filter>Sources\Tools</Filter>
-    </ClCompile>
     <ClCompile Include="Console.cpp">
       <Filter>Sources\Tools</Filter>
     </ClCompile>
@@ -752,20 +764,32 @@
     <ClCompile Include="Color.cpp">
       <Filter>Sources\Tools</Filter>
     </ClCompile>
-    <ClCompile Include="Light.cpp">
-      <Filter>Sources\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysBody3D.cpp">
-      <Filter>Sources\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="Primitive.cpp">
-      <Filter>Sources\Tools</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleGeometryLoader.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleSceneIntro.cpp">
       <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleGameObject.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Sources\Tools\Timers</Filter>
+    </ClCompile>
+    <ClCompile Include="PerfTimer.cpp">
+      <Filter>Sources\Tools\Timers</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Sources\Tools\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Primitive.cpp">
+      <Filter>Sources\Tools\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysBody3D.cpp">
+      <Filter>Sources\Tools\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Sources\Tools\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
