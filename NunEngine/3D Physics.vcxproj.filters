@@ -711,7 +711,10 @@
     <ClInclude Include="GameObject.h">
       <Filter>Sources\Tools\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Components.h">
+    <ClInclude Include="ComponentTransform.h">
+      <Filter>Sources\Tools\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
       <Filter>Sources\Tools\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
@@ -794,7 +797,10 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Sources\Tools\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Components.cpp" />
+    <ClCompile Include="Component.cpp">
+      <Filter>Sources\Tools\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentTransform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="glm\detail\func_common.inl">

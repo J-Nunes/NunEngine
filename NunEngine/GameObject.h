@@ -5,7 +5,8 @@
 #include <string>
 #include "Globals.h"
 #include "ModuleGameObject.h"
-#include "Components.h"
+
+class Component;
 
 class GameObject 
 {
