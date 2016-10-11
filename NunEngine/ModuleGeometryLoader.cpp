@@ -8,6 +8,12 @@
 #include "Assimp/include/postprocess.h"
 #include "Assimp/include/cfileio.h"
 
+#include <gl/GL.h>
+#include "glut\glut.h"
+#include "Devil\include\il.h"
+#include "Devil\include\ilu.h"
+#include "Devil\include\ilut.h"
+
 #pragma comment (lib, "Assimp/libx86/assimp.lib")
 
 ModuleGeometryLoader::ModuleGeometryLoader(Application * app, bool start_enabled) : Module(app, start_enabled)
@@ -44,7 +50,8 @@ update_status ModuleGeometryLoader::PreUpdate(float dt)
 	if (geometry_loaded == false)
 	{
 		LoadGeometry("Brutus.fbx");
-		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		image_name = ilutGLLoadImage("Lenna.png");
+		/*glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 		glGenTextures(1, &image_name);
 		glBindTexture(GL_TEXTURE_2D, image_name);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -52,7 +59,7 @@ update_status ModuleGeometryLoader::PreUpdate(float dt)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, CHECKERS_WIDTH, CHECKERS_HEIGHT,
-			0, GL_RGBA, GL_UNSIGNED_BYTE, checkImage);
+			0, GL_RGBA, GL_UNSIGNED_BYTE, checkImage);*/
 
 		geometry_loaded = true;
 	}
@@ -109,7 +116,7 @@ void ModuleGeometryLoader::LoadGeometry(const char * path)
 			LOG("  -> %d normals", mesh->num_normals);
 
 			uint UV_index = 0;
- 			if (ai_mesh->HasTextureCoords(UV_index))
+ 			if (ai_mesh->HasTextureCoords(mesh->id_text))
  			{
  				mesh->num_text = ai_mesh->mNumVertices;
  				mesh->text = new glm::vec2[mesh->num_text];

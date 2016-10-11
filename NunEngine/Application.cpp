@@ -1,5 +1,13 @@
 #include "Application.h"
 
+#pragma comment (lib, "Devil/libx86/DevIL.lib")    /* link OpenGL Utility lib     */
+#pragma comment (lib, "Devil/libx86/ILU.lib") /* link Microsoft OpenGL lib   */
+#pragma comment (lib, "Devil/libx86/ILUT.lib") 
+
+#include "Devil\include\il.h"
+#include "Devil\include\ilu.h"
+#include "Devil\include\ilut.h"
+
 Application::Application()
 {
 	capped_ms = 1000 / 60;
@@ -48,6 +56,8 @@ Application::~Application()
 bool Application::Init()
 {
 	bool ret = true;
+
+	InitIlu();
 
 	// Call Init() in all modules
 	list<Module*>::iterator i = list_modules.begin();
@@ -102,6 +112,15 @@ void Application::FinishUpdate()
 		SDL_Delay(capped_ms - last_frame_ms);
 		//LOG("We waited for %d milliseconds and got back in %f", capped_ms - last_frame_ms, t.ReadMs());
 	}
+}
+
+void Application::InitIlu()
+{
+	ilInit();
+	iluInit();
+	ilutInit();
+
+	ilutRenderer(ILUT_OPENGL);
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules

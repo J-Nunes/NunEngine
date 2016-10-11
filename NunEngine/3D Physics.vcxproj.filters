@@ -37,6 +37,15 @@
     <Filter Include="Resources\Assimp\include">
       <UniqueIdentifier>{1443b5ba-1f10-456d-92ee-c1f856257e09}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\Devil">
+      <UniqueIdentifier>{e0bda7ec-a2c3-4bd2-98f1-b3224672b1b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Devil\include">
+      <UniqueIdentifier>{e420fa0e-ac54-4ed2-8e45-2b07700690d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Devil\libx86">
+      <UniqueIdentifier>{28e1ec2e-a1d5-47c4-9510-6bdc793b6c0d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -660,6 +669,30 @@
     <ClInclude Include="ModuleSceneIntro.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Devil\include\config.h">
+      <Filter>Resources\Devil\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Devil\include\devil_internal_exports.h">
+      <Filter>Resources\Devil\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Devil\include\il.h">
+      <Filter>Resources\Devil\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Devil\include\il_wrap.h">
+      <Filter>Resources\Devil\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Devil\include\ilu.h">
+      <Filter>Resources\Devil\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Devil\include\ilu_region.h">
+      <Filter>Resources\Devil\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Devil\include\ilut.h">
+      <Filter>Resources\Devil\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Devil\include\ilut_config.h">
+      <Filter>Resources\Devil\include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -1102,10 +1135,24 @@
     <None Include="Assimp\include\vector3.inl">
       <Filter>Resources\Assimp\include</Filter>
     </None>
+    <None Include="Devil\include\config.h.win">
+      <Filter>Resources\Devil\include</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="glm\CMakeLists.txt">
       <Filter>Resources\glm</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Devil\libx86\DevIL.lib">
+      <Filter>Resources\Devil\libx86</Filter>
+    </Library>
+    <Library Include="Devil\libx86\ILU.lib">
+      <Filter>Resources\Devil\libx86</Filter>
+    </Library>
+    <Library Include="Devil\libx86\ILUT.lib">
+      <Filter>Resources\Devil\libx86</Filter>
+    </Library>
   </ItemGroup>
 </Project>
