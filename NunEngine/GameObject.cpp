@@ -28,7 +28,7 @@ void GameObject::Disable()
 	active = false;
 }
 
-const bool GameObject::IsActive()
+const bool GameObject::IsActive() const
 {
 	return active;
 }

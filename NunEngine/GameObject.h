@@ -19,17 +19,17 @@ public:
 	GameObject*		GetParent() const;
 	void			Enable();
 	void			Disable();
-	const bool		IsActive();
+	const bool		IsActive() const;
 
 public:
-	std::string tag;
-	std::vector<GameObject*> children;
+	std::string					tag;
+	std::vector<GameObject*>	children;
 	//std::vector<Component*> components;
 
 private:
-	uint id;
-	GameObject* parent;	
-	bool active;		
+	uint						id = 0;
+	GameObject*					parent = nullptr;	
+	bool						active = true;		
 };
 
 #endif __GAMEOBJECT_H__
