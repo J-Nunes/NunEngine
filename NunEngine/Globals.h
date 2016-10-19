@@ -15,6 +15,14 @@ void log(const char file[], int line, const char* format, ...);
 #define CHECKERS_HEIGHT 128
 #define CHECKERS_WIDTH 128
 
+#define RELEASE( x )\
+    {\
+       if( x != nullptr )\
+       {\
+         delete x;\
+	     x = nullptr;\
+       }\
+    }
 
 typedef unsigned int uint;
 

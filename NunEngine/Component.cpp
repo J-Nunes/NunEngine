@@ -9,6 +9,10 @@ Component::~Component()
 {
 }
 
+void Component::CleanUp()
+{
+}
+
 const COMPONENT_TYPE Component::GetType() const
 {
 	return type;

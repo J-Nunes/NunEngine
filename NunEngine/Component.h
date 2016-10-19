@@ -19,6 +19,8 @@ public:
 	Component(COMPONENT_TYPE _type, const char* _name,GameObject* _game_object);
 	virtual ~Component();
 
+	virtual void CleanUp();
+
 	const COMPONENT_TYPE	GetType()const;
 	GameObject*				GetGameObject() const;
 	void					Enable();

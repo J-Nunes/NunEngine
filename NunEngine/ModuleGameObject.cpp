@@ -22,6 +22,9 @@ update_status ModuleGameObject::Update(float dt)
 
 bool ModuleGameObject::CleanUp()
 {
+	Clean(root);
+	RELEASE(root);
+
 	return true;
 }
 
@@ -60,5 +63,19 @@ void ModuleGameObject::SetParent(GameObject* child, GameObject* parent)
 			child->parent = root;
 			root->children.push_back(child);
 		}	
+	}
+}
+
+void ModuleGameObject::CleanAllGameObjects(GameObject* go_to_remove)
+{
+	if (go_to_remove->children.size > 0)
+	{
+		for (vector<GameObject*>::iterator item = go_to_remove->children.begin(); item != go_to_remove->children.end(); item++)
+			CleanAllGameObjects((*item));
+
+		for (vector<GameObject*>::iterator item = go_to_remove->children.begin(); item != go_to_remove->children.end(); item++)
+			RELEASE((*item));
+
+		go_to_remove->children.clear();
 	}
 }

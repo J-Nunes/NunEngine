@@ -1,4 +1,5 @@
 #include "GameObject.h"
+#include "Component.h"
 
 GameObject::GameObject(const uint _id, const char * name) : tag(name), id(_id)
 {
@@ -6,6 +7,14 @@ GameObject::GameObject(const uint _id, const char * name) : tag(name), id(_id)
 
 GameObject::~GameObject()
 {
+	std::vector<Component*>::iterator it = components.begin();
+	while (it != components.end())
+	{
+		(*it)->CleanUp();
+		RELEASE(*it);
+		it++;
+	}
+	components.clear();
 }
 
 bool GameObject::Update()
