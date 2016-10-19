@@ -800,7 +800,9 @@
     <ClCompile Include="Component.cpp">
       <Filter>Sources\Tools\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="ComponentTransform.cpp" />
+    <ClCompile Include="ComponentTransform.cpp">
+      <Filter>Sources\Tools\GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="glm\detail\func_common.inl">

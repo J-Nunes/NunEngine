@@ -1,7 +1,7 @@
 #include "Component.h"
 #include "GameObject.h"
 
-Component::Component(COMPONENT_TYPE _type, GameObject* _game_object) : type(_type), game_object(_game_object)
+Component::Component(COMPONENT_TYPE _type, const char* _name, GameObject* _game_object) : type(_type), name(_name), game_object(_game_object)
 {
 }
 

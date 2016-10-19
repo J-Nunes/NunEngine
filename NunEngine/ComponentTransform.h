@@ -4,6 +4,7 @@
 #include "Component.h"
 #include "glm\fwd.hpp"
 #include "glm\glm.hpp"
+#include "glm\gtc\quaternion.hpp"
 
 
 class GameObject;
@@ -15,7 +16,7 @@ public:
 	~ComponentTransform();
 
 private:
-	//glm::quat		rotation;
+	glm::quat		rotation;
 	glm::vec3		translation;
 	glm::vec3		scale;
 	glm::mat4x4		transform_mat;

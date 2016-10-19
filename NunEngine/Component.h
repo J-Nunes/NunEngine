@@ -3,6 +3,9 @@
 
 class GameObject;
 
+#include <string>
+
+
 enum COMPONENT_TYPE
 {
 	TRANSFORMATION = 0,
@@ -13,7 +16,7 @@ enum COMPONENT_TYPE
 class Component 
 {
 public:
-	Component(COMPONENT_TYPE _type, GameObject* _game_object);
+	Component(COMPONENT_TYPE _type, const char* _name,GameObject* _game_object);
 	virtual ~Component();
 
 	const COMPONENT_TYPE	GetType()const;
@@ -21,6 +24,9 @@ public:
 	void					Enable();
 	void					Disable();
 	const bool				IsActive() const;
+
+public:
+	std::string name;
 
 private:
 	COMPONENT_TYPE			type;
