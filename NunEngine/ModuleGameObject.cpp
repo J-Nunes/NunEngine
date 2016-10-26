@@ -22,8 +22,11 @@ update_status ModuleGameObject::Update(float dt)
 
 bool ModuleGameObject::CleanUp()
 {
-	Clean(root);
-	RELEASE(root);
+	if (root)
+	{
+		CleanAllGameObjects(root);
+		RELEASE(root);
+	}
 
 	return true;
 }
@@ -68,7 +71,7 @@ void ModuleGameObject::SetParent(GameObject* child, GameObject* parent)
 
 void ModuleGameObject::CleanAllGameObjects(GameObject* go_to_remove)
 {
-	if (go_to_remove->children.size > 0)
+	if (go_to_remove->children.size() > 0)
 	{
 		for (vector<GameObject*>::iterator item = go_to_remove->children.begin(); item != go_to_remove->children.end(); item++)
 			CleanAllGameObjects((*item));

@@ -10,8 +10,7 @@ class Component;
 
 class GameObject 
 {
-friend void ModuleGameObject::SetParent(GameObject* child, GameObject* parent);
-
+	friend class 	ModuleGameObject;
 public:
 	GameObject(const uint _id, const char* name);
 	~GameObject();

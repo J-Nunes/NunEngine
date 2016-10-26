@@ -19,11 +19,11 @@ public:
 	GameObject*			CreateGameObject(const char* name, GameObject* parent = nullptr);
 
 private:
-	void				SetParent(GameObject* child, GameObject* parent);
 	void				CleanAllGameObjects(GameObject* go_to_remove);
+	void				SetParent(GameObject* child, GameObject* parent);
 
 private:
-	GameObject*			root = nullptr;
+	GameObject*	root = nullptr;
 	uint				current_id = 0;
 };
 #endif // __MODULE_GEOMETRY_LOADER_H__
